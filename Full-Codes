@@ -1,0 +1,301 @@
+#Bayesian Update
+
+from collections import defaultdict
+import numpy as np
+
+def likelihood(d, s, D):
+    """
+    Calculate the likelihood P(d|s, D)
+    This function should be implemented based on your specific problem.
+    """
+    # Implement your likelihood function here
+    return 1.0  # Placeholder
+
+def normalize(distribution):
+    """
+    Normalize the distribution so that it sums to 1.
+    """
+    total = sum(distribution.values())
+    for state in distribution:
+        distribution[state] /= total
+
+def BayesianUpdate(prior_distribution, d, states):
+    """
+    Perform Bayesian update on the prior distribution P(s|D) given new data d.
+    
+    Parameters:
+    - prior_distribution: The prior distribution P(s|D) as a dictionary.
+    - d: The new data point.
+    - states: The list of all possible states.
+    
+    Returns:
+    - posterior_distribution: The updated distribution P(s|D, d) as a dictionary.
+    """
+    
+    # Initialize the posterior distribution
+    posterior_distribution = defaultdict(float)
+    
+    # Loop through each state to update the posterior distribution
+    for s in states:
+        # Calculate the likelihood P(d|s, D)
+        likelihood_value = likelihood(d, s, prior_distribution)
+        
+        # Update the posterior distribution using the Bayesian formula
+        posterior_distribution[s] = prior_distribution[s] * likelihood_value
+    
+    # Normalize the posterior distribution
+    normalize(posterior_distribution)
+    
+    return posterior_distribution
+
+# Example usage
+if __name__ == "__main__":
+    # Define the prior distribution P(s|D) and states
+    prior_distribution = {'s1': 0.2, 's2': 0.4, 's3': 0.4}
+    states = ['s1', 's2', 's3']
+    
+    # Define the new data point d
+    d = "new_data_point"
+    
+    # Perform Bayesian update
+    posterior_distribution = BayesianUpdate(prior_distribution, d, states)
+    
+    # Output the updated posterior distribution P(s|D, d)
+    print("Updated Posterior Distribution:", posterior_distribution)
+
+
+
+#BayesNet Real-Time Adaptation
+
+from collections import defaultdict
+import numpy as np
+
+def mutual_information(X, s_given_D, x):
+    """
+    Calculate the mutual information MI(X; s|D) for a given measurement x.
+    This function should be implemented based on your specific problem.
+    """
+    # Implement your mutual information function here
+    return 1.0  # Placeholder
+
+def RealTimeAdaptation(prior_distribution, X):
+    """
+    Perform real-time adaptation to decide the next measurement x*.
+    
+    Parameters:
+    - prior_distribution: The prior distribution P(s|D) as a dictionary.
+    - X: The list of all possible measurements.
+    
+    Returns:
+    - x_star: The next measurement to be taken.
+    """
+    
+    # Initialize variables
+    max_MI = 0
+    x_star = None
+    
+    # Loop through each possible measurement to find the one that maximizes mutual information
+    for x in X:
+        # Calculate the mutual information MI(X; s|D)
+        MI_value = mutual_information(X, prior_distribution, x)
+        
+        # Update max_MI and x_star if a higher MI is found
+        if MI_value > max_MI:
+            max_MI = MI_value
+            x_star = x
+    
+    return x_star
+
+# Example usage
+if __name__ == "__main__":
+    # Define the prior distribution P(s|D) and possible measurements X
+    prior_distribution = {'s1': 0.2, 's2': 0.4, 's3': 0.4}
+    X = ['x1', 'x2', 'x3']
+    
+    # Perform real-time adaptation
+    x_star = RealTimeAdaptation(prior_distribution, X)
+    
+    # Output the next measurement x*
+    print("Next Measurement:", x_star)
+
+#BayesNet-ID Cost-Benefit Analysis
+
+from collections import defaultdict
+import numpy as np
+
+def cost_benefit_function(x, s, D):
+    """
+    Calculate the cost-benefit score F(x, s, D) for a given measurement x.
+    This function should be implemented based on your specific problem.
+    """
+    # Implement your cost-benefit function here
+    return 1.0  # Placeholder
+
+def CostBenefitAnalysis(prior_distribution, X):
+    """
+    Perform cost-benefit analysis to decide the next measurement x*.
+    
+    Parameters:
+    - prior_distribution: The prior distribution P(s|D) as a dictionary.
+    - X: The list of all possible measurements.
+    
+    Returns:
+    - x_star: The next measurement to be taken.
+    """
+    
+    # Initialize variables
+    max_F = float('-inf')
+    x_star = None
+    
+    # Loop through each possible measurement to find the one that maximizes the cost-benefit score
+    for x in X:
+        # Calculate the cost-benefit score F(x, s, D)
+        F_value = cost_benefit_function(x, prior_distribution, X)
+        
+        # Update max_F and x_star if a higher F is found
+        if F_value > max_F:
+            max_F = F_value
+            x_star = x
+    
+    return x_star
+
+# Example usage
+if __name__ == "__main__":
+    # Define the prior distribution P(s|D) and possible measurements X
+    prior_distribution = {'s1': 0.2, 's2': 0.4, 's3': 0.4}
+    X = ['x1', 'x2', 'x3']
+    
+    # Perform cost-benefit analysis
+    x_star = CostBenefitAnalysis(prior_distribution, X)
+    
+    # Output the next measurement x*
+    print("Next Measurement:", x_star)
+
+
+Note that the `cost_benefit_function` function is a placeholder and should be implemented based on your specific problem. The `CostBenefitAnalysis` function takes the prior distribution \( P(s|D) \) and the list of possible measurements \( X \), and returns the next measurement \( x* \) that maximizes the cost-benefit score \( F(x, s, D) \).
+
+
+#Certainly, the Bayesian Update for Software-Defined Networks (SDNs) can be implemented in Python. Below is a Python code snippet that demonstrates how to implement this algorithm based on the experimental setup described in the LaTeX algorithm.
+
+```python
+from collections import defaultdict
+import numpy as np
+
+def likelihood_function(d, s_SDN, D):
+    """
+    Calculate the likelihood P(d|s_SDN, D) for a given state s_SDN and new data d.
+    This function should be implemented based on your specific problem.
+    """
+    # Implement your likelihood function here
+    return 1.0  # Placeholder
+
+def BayesianUpdateSDN(prior_distribution, new_data):
+    """
+    Perform Bayesian update for SDNs.
+    
+    Parameters:
+    - prior_distribution: The prior distribution P(s_SDN|D) as a dictionary.
+    - new_data: The new data point d.
+    
+    Returns:
+    - posterior_distribution: The updated posterior distribution P(s_SDN|D, d).
+    """
+    
+    # Initialize posterior distribution
+    posterior_distribution = defaultdict(float)
+    
+    # Loop through each state in S_SDN to update the posterior distribution
+    for s_SDN in prior_distribution.keys():
+        # Calculate the likelihood P(d|s_SDN, D)
+        likelihood = likelihood_function(new_data, s_SDN, prior_distribution)
+        
+        # Update the posterior distribution using Bayes' theorem
+        posterior_distribution[s_SDN] = prior_distribution[s_SDN] * likelihood
+    
+    # Normalize the posterior distribution
+    total_probability = sum(posterior_distribution.values())
+    for s_SDN in posterior_distribution.keys():
+        posterior_distribution[s_SDN] /= total_probability
+    
+    return dict(posterior_distribution)
+
+# Example usage
+if __name__ == "__main__":
+    # Define the prior distribution P(s_SDN|D) and new data point d
+    prior_distribution = {'s1': 0.2, 's2': 0.4, 's3': 0.4}
+    new_data = 'd1'
+    
+    # Perform Bayesian update
+    posterior_distribution = BayesianUpdateSDN(prior_distribution, new_data)
+    
+    # Output the updated posterior distribution
+    print("Updated Posterior Distribution:", posterior_distribution)
+
+Note that the `likelihood_function` function is a placeholder and should be implemented based on your specific problem. 
+The `BayesianUpdateSDN` function takes the prior distribution \( P(s_{\text{SDN}}|D) \) and the new data point \( d \), 
+and returns the updated posterior distribution \( P(s_{\text{SDN}}|D, d) \).
+
+
+#Certainly, the Bayesian Update for Peer-to-Peer Networks can be implemented in Python. 
+#Below is a Python code snippet that demonstrates how to implement this algorithm based on the experimental setup described in the LaTeX algorithm.
+
+```python
+from collections import defaultdict
+import numpy as np
+
+def likelihood_function_P2P(d, s_P2P, D):
+    """
+    Calculate the likelihood P(d|s_P2P, D) for a given state s_P2P and new data d.
+    This function should be implemented based on your specific problem.
+    """
+    # Implement your likelihood function here
+    return 1.0  # Placeholder
+
+def BayesianUpdateP2P(prior_distribution, new_data):
+    """
+    Perform Bayesian update for Peer-to-Peer Networks.
+    
+    Parameters:
+    - prior_distribution: The prior distribution P(s_P2P|D) as a dictionary.
+    - new_data: The new data point d.
+    
+    Returns:
+    - posterior_distribution: The updated posterior distribution P(s_P2P|D, d).
+    """
+    
+    # Initialize posterior distribution
+    posterior_distribution = defaultdict(float)
+    
+    # Loop through each state in S_P2P to update the posterior distribution
+    for s_P2P in prior_distribution.keys():
+        # Calculate the likelihood P(d|s_P2P, D)
+        likelihood = likelihood_function_P2P(new_data, s_P2P, prior_distribution)
+        
+        # Update the posterior distribution using Bayes' theorem
+        posterior_distribution[s_P2P] = prior_distribution[s_P2P] * likelihood
+    
+    # Normalize the posterior distribution
+    total_probability = sum(posterior_distribution.values())
+    for s_P2P in posterior_distribution.keys():
+        posterior_distribution[s_P2P] /= total_probability
+    
+    return dict(posterior_distribution)
+
+# Example usage
+if __name__ == "__main__":
+    # Define the prior distribution P(s_P2P|D) and new data point d
+    prior_distribution = {'s1': 0.2, 's2': 0.4, 's3': 0.4}
+    new_data = 'd1'
+    
+    # Perform Bayesian update
+    posterior_distribution = BayesianUpdateP2P(prior_distribution, new_data)
+    
+    # Output the updated posterior distribution
+    print("Updated Posterior Distribution:", posterior_distribution)
+```
+
+Note that the `likelihood_function_P2P` function is a placeholder and should be implemented based on your specific problem. 
+The `BayesianUpdateP2P` function takes the prior distribution \( P(s_{\text{P2P}}|D) \) and the new data point \( d \), and returns the updated posterior distribution \( P(s_{\text{P2P}}|D, d) \).
+
+
+
