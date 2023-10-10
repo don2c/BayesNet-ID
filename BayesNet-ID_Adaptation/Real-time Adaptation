@@ -1,0 +1,50 @@
+from collections import defaultdict
+import numpy as np
+
+def mutual_information(X, s_given_D, x):
+    """
+    Calculate the mutual information MI(X; s|D) for a given measurement x.
+    This function should be implemented based on your specific problem.
+    """
+    # Implement your mutual information function here
+    return 1.0  # Placeholder
+
+def RealTimeAdaptation(prior_distribution, X):
+    """
+    Perform real-time adaptation to decide the next measurement x*.
+    
+    Parameters:
+    - prior_distribution: The prior distribution P(s|D) as a dictionary.
+    - X: The list of all possible measurements.
+    
+    Returns:
+    - x_star: The next measurement to be taken.
+    """
+    
+    # Initialize variables
+    max_MI = 0
+    x_star = None
+    
+    # Loop through each possible measurement to find the one that maximizes mutual information
+    for x in X:
+        # Calculate the mutual information MI(X; s|D)
+        MI_value = mutual_information(X, prior_distribution, x)
+        
+        # Update max_MI and x_star if a higher MI is found
+        if MI_value > max_MI:
+            max_MI = MI_value
+            x_star = x
+    
+    return x_star
+
+# Example usage
+if __name__ == "__main__":
+    # Define the prior distribution P(s|D) and possible measurements X
+    prior_distribution = {'s1': 0.2, 's2': 0.4, 's3': 0.4}
+    X = ['x1', 'x2', 'x3']
+    
+    # Perform real-time adaptation
+    x_star = RealTimeAdaptation(prior_distribution, X)
+    
+    # Output the next measurement x*
+    print("Next Measurement:", x_star)
