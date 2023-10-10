@@ -1,0 +1,62 @@
+from collections import defaultdict
+import numpy as np
+
+def likelihood(d, s, D):
+    """
+    Calculate the likelihood P(d|s, D)
+    This function should be implemented based on your specific problem.
+    """
+    # Implement your likelihood function here
+    return 1.0  # Placeholder
+
+def normalize(distribution):
+    """
+    Normalize the distribution so that it sums to 1.
+    """
+    total = sum(distribution.values())
+    for state in distribution:
+        distribution[state] /= total
+
+def BayesianUpdate(prior_distribution, d, states):
+    """
+    Perform Bayesian update on the prior distribution P(s|D) given new data d.
+    
+    Parameters:
+    - prior_distribution: The prior distribution P(s|D) as a dictionary.
+    - d: The new data point.
+    - states: The list of all possible states.
+    
+    Returns:
+    - posterior_distribution: The updated distribution P(s|D, d) as a dictionary.
+    """
+    
+    # Initialize the posterior distribution
+    posterior_distribution = defaultdict(float)
+    
+    # Loop through each state to update the posterior distribution
+    for s in states:
+        # Calculate the likelihood P(d|s, D)
+        likelihood_value = likelihood(d, s, prior_distribution)
+        
+        # Update the posterior distribution using the Bayesian formula
+        posterior_distribution[s] = prior_distribution[s] * likelihood_value
+    
+    # Normalize the posterior distribution
+    normalize(posterior_distribution)
+    
+    return posterior_distribution
+
+# Example usage
+if __name__ == "__main__":
+    # Define the prior distribution P(s|D) and states
+    prior_distribution = {'s1': 0.2, 's2': 0.4, 's3': 0.4}
+    states = ['s1', 's2', 's3']
+    
+    # Define the new data point d
+    d = "new_data_point"
+    
+    # Perform Bayesian update
+    posterior_distribution = BayesianUpdate(prior_distribution, d, states)
+    
+    # Output the updated posterior distribution P(s|D, d)
+    print("Updated Posterior Distribution:", posterior_distribution)
